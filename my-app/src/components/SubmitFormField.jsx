@@ -1,9 +1,10 @@
-import "../styles/SubmitFormField.css"
+import "../styles/SubmitFormField.css";
+import  { Button } from "./Button";
 
 export function SubmitFormField (props) {
     return (
         <div className="submit-form-filed">
-            <button type="submit">{props.label}</button>
+            <Button type="submit" label={props.label} />
         </div>
     );
 };

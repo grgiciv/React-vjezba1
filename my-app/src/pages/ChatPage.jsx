@@ -1,7 +1,8 @@
-import { InputFormField } from "../components/InputFormField";
 import { Message } from "../components/message";
-import { SubmitFormField } from "../components/SubmitFormField";
 import { useState } from "react";
+import { MessageForm } from "../components/MessageForm";
+import { useContext } from "react";
+import { AppContext } from "../contexts/AppContext";
 
 
 export function ChatPage(props) {
@@ -13,26 +14,12 @@ export function ChatPage(props) {
                 text={message.text}/>);
     jedan način za prikazivanje poruka
     } */
-    const [ formState, setFormState ] = useState('');
     const [messages, setMessages] = useState([]);
+    const context = useContext(AppContext);
 
-    function handleChange(message){
-        setFormState(message);
+    function handleSubmit(message) {
+        setMessages([ ...messages, message]);
     }
-
-    function handleSubmit(event) {
-        event.preventDefault();
-        setFormState('');
-        setMessages([ ...messages, {
-            id: Date.now(),
-            author: {
-                username: props.username,
-                avatarIndex: props.avatarIndex,
-            },
-            text: formState,
-        }]);
-    }
-    console.log(formState);
 
     const messageComponents = messages.map((message) => {
         return <Message key={message.id} 
@@ -48,10 +35,9 @@ export function ChatPage(props) {
             <div className="message-list">
                 {messageComponents}
             </div>
-            <form onSubmit={handleSubmit}>
-                <InputFormField label="Message" type="text" value={formState} onChange={handleChange}/>
-                <SubmitFormField label="Send"/>
-            </form>
+            <MessageForm onSubmit={handleSubmit}
+                username={props.username}
+                avatarIndex={context.avatarIndex}/>
         </div>
     );
 };

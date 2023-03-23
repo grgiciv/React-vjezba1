@@ -3,14 +3,17 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AppProvider } from './contexts/AppContext';
+import { BrowserRouter } from 'react-router-dom'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <AppProvider> omata cijeli app u context
   <React.StrictMode>
-    <AppProvider value="test">
-      <App />
-    </AppProvider>  
+    <BrowserRouter>
+      <AppProvider value="test">
+        <App />
+      </AppProvider>
+    </BrowserRouter>  
   </React.StrictMode>
 );
 

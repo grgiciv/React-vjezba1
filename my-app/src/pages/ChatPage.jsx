@@ -3,6 +3,7 @@ import { useState } from "react";
 import { MessageForm } from "../components/MessageForm";
 import { useContext } from "react";
 import { AppContext } from "../contexts/AppContext";
+import { Navigate } from "react-router-dom";
 
 
 export function ChatPage(props) {
@@ -21,6 +22,8 @@ export function ChatPage(props) {
         setMessages([ ...messages, message]);
     }
 
+    
+
     const messageComponents = messages.map((message) => {
         return <Message key={message.id} 
             avatarIndex={message.author.avatarIndex}
@@ -29,14 +32,19 @@ export function ChatPage(props) {
         
     });
 
+    if (!context.isSignedIn) {
+        return <Navigate to="/" replace />;
+    }
+
     return(
         <div>
             Chat page
+            <button type="button" onClick={context.SignOut}>Sign out</button>
             <div className="message-list">
                 {messageComponents}
             </div>
             <MessageForm onSubmit={handleSubmit}
-                username={props.username}
+                username={context.username}
                 avatarIndex={context.avatarIndex}/>
         </div>
     );

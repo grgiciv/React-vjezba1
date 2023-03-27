@@ -14,7 +14,7 @@ function App() {
       <h1>ERROR</h1>
       <div>Something went wrong: {context.error.toString()}</div>
     </div>);
-}
+  }
 
   return (
       <Routes>

@@ -19,7 +19,6 @@ export function MessageOfTheDay () {
         }
     }, [shouldFetch]);
 
-    console.log(data);
 
     if (data == null) {
         return <div>Loading message of the day...</div>

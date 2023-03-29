@@ -3,7 +3,6 @@ import { getRandomName } from "../library/random";
 
 export function RandomNameButton(props) {
     function handleClick() {
-        //console.log(getRandomName());
         props.onRandomName(getRandomName());
     }
     return(
